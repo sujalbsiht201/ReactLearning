@@ -1,64 +1,104 @@
-import { useState } from "react";
-//import { Button } from "./component/atomic.tsx/Button";
-//import { Text } from "./component/atomic.tsx/text";
-//import { Counter } from "./component/Counter";
-//import { Flexbox } from "./component/Flexbox";
-//import { Footer } from "./component/Footer";
-//import { Heade } from "./component/Header";
-
-
-
-
-function App(){ 
-
-  const [songs,setSongs]= useState([
-    {singer:"mohit chauhan",name:"saiyan"},
-    "parinda","bekhayali","Co2","Therapy"
-    ])
-
-  //const handleAlirt = () => {
-    //  alert("save")
-  //}
-
-  //const handleAlert = () => {
-    //  alert("sujal")
-  //}
-
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Container } from "./component/atomic/Container";
+import { Header } from "./component/Header";
+import { Footer } from "./component/Footer";
+import { CardList } from "./component/orgenism/CardList.";
+import { useEffect, useRef, useState } from "react";
+import { Img } from "./component/atomic/Img";
+import { Audio } from "./component/atomic/Audio";
+const Home = () => {
   return (
     <>
-      {/* <div className="m-50 flex justify-center"> */}
-         {/* <Button label="click" onClick={handleAlirt}/> */}
-         {/* <Button label="save" onClick={handleAlert} /> */}
-      {/* </div> */}
-      <div className="flex bg-black py-4">
- 
-        <div className="bg-blue-400 text-white rounded-full mx-4 px-2 hover:bg-green-400">S</div>
-        <div className="bg-stone-400 text-white rounded-full mx-4 px-4 hover:bg-green-400">All</div>
-        <div className="bg-stone-400 rounded-full text-white mx-4 px-6 hover:bg-green-400">Music</div>
-        <div className="bg-stone-400 text-white rounded-full mx-4 px-6 hover:bg-green-400">Podcasts</div>        
-      </div>
-  
-        <h1 className="bg-black text-white"><b>Albums featuring songs you like</b></h1>
-      <ul>
-      { 
-        songs.map((song,idx) => {
-          return <li className="bg-blue-200 p-2 border-b">
-            
-          <i className="fa-solid fa-music"></i>{song}
-            
-            </li>
-        }) 
-      }
-      </ul>
-
-      <div className="flex justify-between bg-black">
-      <div className="flex flex-col text-white m-4"><i className="fa-solid fa-house"></i>Home</div>
-        <div className="flex flex-col text-white m-4"><i className="fa-solid fa-magnifying-glass"></i>Search</div>
-        <div className="flex flex-col text-white m-4"><i className="fa-solid fa-book"></i>Your Library</div>
-        <div className="flex flex-col text-white m-4"><i className="fa-solid fa-coins"></i>Premium</div>
-      </div>
+      <Container>
+        <Header />
+        <CardList />
+        <Footer />
+      </Container>
     </>
-  )
+  );
+};
 
+const PlayList = () => {
+  const [songs, setSongs] = useState([]);
+  // const [showSong, setShowSong] = useState(false);
+  const [play, setPlay] = useState([]);
+  const [selectedSong, setSelectedSong] = useState();
+  console.log(play);
+  const audioPlayer = useRef(null);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/songs")
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        setSongs(res);
+        setPlay(Array(res.length).fill(true));
+      });
+  }, []);
+
+  function handleClick(index, id) {
+    // setPlay(play[index] ? false:true);
+    const temp = [...play];
+    if (temp[index]) {
+      temp[index] = false;
+      audioPlayer.current?.play()
+    } else {
+      temp[index] = true;
+       audioPlayer.current?.pause() 
+    }
+    console.log(temp, play);
+    setPlay(temp);
+    songs && setSelectedSong(songs.filter((song) => song.id == id));
+  }
+  return (
+    <>
+      {songs.map((song, index) => {
+        return (
+          <>
+            <li className="flex items-center bg-stone-400 border-b gap-2 p-2">
+              {play[index] ? (
+                <i
+                  className="fa-solid fa-play"
+                  onClick={() => {
+                    handleClick(index, song.id);
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="fa-solid fa-pause"
+                  onClick={() => {
+                    handleClick(index, song.id);
+                  }}
+                ></i>
+              )}
+
+              <Img src={song.coverImage} />
+
+              <div className="flex flex-col">
+                <p>{song.title}</p>
+                {song.lyricsSnippet}
+              </div>
+            </li>
+          </>
+        );
+      })}
+      {selectedSong && <Audio song={selectedSong[0]} ref={audioPlayer}/>}
+    </>
+  );
+};
+
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/playlist" element={<PlayList />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
+
 export default App;

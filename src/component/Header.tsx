@@ -1,9 +1,12 @@
 export const Header=()=>{
    return(
       <>
-         <header>
-            <h1>hy! your counting is starts here</h1>
+      <div>
+         <header className="bg-black">
+            <h1 className="font-extrabold text-white text-3xl px-2">MyMusic</h1>
+            <h4 className="text-white px-2">dil se suno</h4>
          </header>
+         </div>
      
     </>
    ) 
