@@ -6,6 +6,7 @@ import { CardList } from "./component/orgenism/CardList.";
 import { useEffect, useRef, useState } from "react";
 import { Img } from "./component/atomic/Img";
 import { Audio } from "./component/atomic/Audio";
+
 const Home = () => {
   return (
     <>
