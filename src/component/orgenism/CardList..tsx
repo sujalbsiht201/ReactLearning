@@ -3,6 +3,7 @@ import { Img } from "../atomic/Img";
 import { Card } from "../molecule.tsx/Card";
 import { Audio } from "../atomic/Audio";
 import { SearchBar } from "../atomic/SearchBar";
+import { Link } from "react-router-dom";
 
 export const CardList = () => {
   const [songs, setSongs] = useState([]);
@@ -20,7 +21,7 @@ export const CardList = () => {
   console.log(songs);
 
   return (
-    <>
+    <main className="p-4">
     <div className="flex justify-center">
       <SearchBar  />
     </div>
@@ -49,6 +50,7 @@ export const CardList = () => {
           songs.map((song) => {
             return (
               <>
+                <Link to="playlist">
                 <li className=" flex flex-col w-96  justify-center bg-black border p-2">
                   <p className="text-white">{song.language}</p>
                   {!showSong ? (
@@ -57,6 +59,7 @@ export const CardList = () => {
                       onClick={() => {
                         setShowSong(true);
                       }}
+                      cls="cursor-pointer h-32"
                     />
                   ) : (
                     <Audio url={song.songUrl} />
@@ -66,11 +69,12 @@ export const CardList = () => {
                     <i className="fa-regular fa-heart px-4"></i>
                   </p>
                 </li>
+                </Link>
               </>
             );
           })}
       </ul>
       <Card />
-    </>
+    </main>
   );
 };
