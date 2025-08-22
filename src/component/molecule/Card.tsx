@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Img } from "../atomic/Img";
+import { Img } from "../atomic/Img1";
+// import { PlayTable } from "../atomic/PlayTable";
+import { Artists } from "../orgenism/Artists";
 
 export const Card = () => {
   const [albums, setAlbums] = useState([0]);
@@ -14,16 +16,16 @@ export const Card = () => {
   }, []);
   return (
     <>
-      <h1 className="font-bold py-2 text-white bg-black text-3xl px-2">
+      <h1 className="font-bold py-2 text-white bg-stone-600 text-3xl px-2">
        Albums....
       </h1>
       
-      <ul className="flex gap-2 scrollbar-none [scrollbar-width:none] overflow-x-scroll">
+      <ul className="flex gap-2 scrollbar-none [scrollbar-width:none] overflow-x-scroll bg-stone-600">
         {albums&&
           albums.map((albums) => {
             return (
               <>
-                <li className="flex flex-col w-96  justify-center bg-black border p-2">
+                <li className="flex flex-col w-96  justify-center bg-stone-600 p-2">
                   <p className="text-white">{albums.title}</p>
                   <Img src={albums.cover} cls="cursor-pointer h-32"/>
                   <p className="text-white">{albums.releaseYear}</p>
@@ -32,6 +34,8 @@ export const Card = () => {
             );
           })}
       </ul>
+       {/* <PlayTable/> */}
+       <Artists/>
     </>
   );
 };

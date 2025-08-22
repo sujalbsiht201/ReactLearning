@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
-import { Img } from "../atomic/Img";
-import { Card } from "../molecule.tsx/Card";
+import { useEffect, useRef, useState } from "react";
+import { Img } from "../atomic/Img1";
+import { Card } from "../molecule/Card";
 import { Audio } from "../atomic/Audio";
-import { SearchBar } from "../atomic/SearchBar";
-import { Link } from "react-router-dom";
+import { Link, useActionData } from "react-router-dom";
+import { PlayTable } from "../atomic/PlayTable";
+import { Tabs } from "../atomic/Tabs";
 
 export const CardList = () => {
   const [songs, setSongs] = useState([]);
   const [showSong, setShowSong] = useState(false);
+  const [showTable, setShowTable] = useState(false);
+  const [selectedSong, setSelectedSong] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/songs")
@@ -20,61 +23,62 @@ export const CardList = () => {
   }, []);
   console.log(songs);
 
+  
+
+  function handleClick(e, index, id) {
+    e.preventDefault(); // Prevent navigation
+    e.stopPropagation(); // Stop bubbling to Link
+    setSelectedSong(songs.find((song) => song.id === id));
+    console.log(index);
+    setShowTable(true);
+  }
+
   return (
     <main className="p-4">
-    <div className="flex justify-center">
-      <SearchBar  />
-    </div>
-
-      <div className="flex bg-black py-4">
-        <div className="bg-blue-400 text-white rounded-full mx-4 px-2 hover:bg-green-400">
-          S
-        </div>
-        <div className="bg-stone-400 text-white rounded-full mx-4 px-4 hover:bg-green-400">
-          All
-        </div>
-        <div className="bg-stone-400 rounded-full text-white mx-4 px-6 hover:bg-green-400">
-          Music
-        </div>
-        <div className="bg-stone-400 text-white rounded-full mx-4 px-6 hover:bg-green-400">
-          Podcasts
-        </div>
-      </div>
-
-      <h1 className="font-bold py-2 text-white bg-black text-3xl px-2">
+        <Tabs/>
+      <h1 className="font-bold py-2 text-white bg-stone-600 text-3xl px-2">
         Tranding Songs 2025-Best....
       </h1>
 
-      <ul className="flex gap-2 scrollbar-none [scrollbar-width:none] overflow-x-scroll">
+      <ul className="flex gap-2 scrollbar-none [scrollbar-width:none] overflow-x-scroll bg-stone-600">
         {songs &&
-          songs.map((song) => {
+          songs.map((song, index) => {
             return (
               <>
                 <Link to="playlist">
-                <li className=" flex flex-col w-96  justify-center bg-black border p-2">
-                  <p className="text-white">{song.language}</p>
-                  {!showSong ? (
-                    <Img
-                      src={song.coverImage}
-                      onClick={() => {
-                        setShowSong(true);
-                      }}
-                      cls="cursor-pointer h-32"
-                    />
-                  ) : (
-                    <Audio url={song.songUrl} />
-                  )}
-                  <p className="text-stone-400">
-                    {song.lyricsSnippet}
-                    <i className="fa-regular fa-heart px-4"></i>
-                  </p>
-                </li>
+                  <div className="">
+                    <li className=" flex flex-col w-54  justify-center bg-stone-600 p-2 relative">
+                      <p className="text-white">{song.language}</p>
+                      {!showSong ? (
+                        <Img
+                          src={song.coverImage}
+                          onClick={() => {
+                            setShowSong(true);
+                          }}
+                          cls="cursor-pointer h-42"
+                        />
+                      ) : (
+                        <Audio url={song.songUrl} />
+                      )}
+                      <div
+                        className="bg-green-400 w-14 h-14 rounded-full flex justify-center p-2 items-center absolute bottom-12 right-10"
+                        onClick={(e) => handleClick(e, index, song.id)}
+                      >
+                        <i className="fa-solid fa-play text-xl"></i>
+                      </div>
+                      <p className="text-white py-2 px-2 truncate">
+                        {song.lyricsSnippet}
+                        <i className="fa-regular fa-heart px-4"></i>
+                      </p>
+                    </li>
+                  </div>
                 </Link>
               </>
             );
           })}
       </ul>
       <Card />
+      {showTable && <PlayTable song={selectedSong} />}
     </main>
   );
 };

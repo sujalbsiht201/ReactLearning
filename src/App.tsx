@@ -1,44 +1,18 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { Container } from "./component/atomic/Container";
-import { Header } from "./component/Header";
-import { Footer } from "./component/Footer";
-import { CardList } from "./component/orgenism/CardList.";
-import { PlayList } from "./component/orgenism/PlayList";
+import { SideMyBar } from "./component/molecule/SideMyBar";
+import { MyMusic } from "./component/orgenism/MyMusic";
 
-const Home = () => {
-  return (
-    <>
-      <Container>
-        <Header />
-        <CardList />
-        <Footer />
-      </Container>
-    </>
-  );
-};
 
-const SongPlaylist = () => {
-  return (
-    <>
-      <Container>
-        <Header />
-        <PlayList />
-        <Footer />
-      </Container>
-    </>
-  );
-}
+
+
 
 function App() {
+  // const [on , setOn] = useState(true)
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/playlist" element={<SongPlaylist />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <div className="gap-2">
+     
+      <MyMusic/>  
+    </div>
+
   );
 }
 

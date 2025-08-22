@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { Img } from "../atomic/Img";
+import { Img } from "../atomic/Img1";
 import { Audio } from "../atomic/Audio";
 
 export const PlayList = () => {
+
   const [songs, setSongs] = useState([]);
   const [playingIndex, setPlayingIndex] = useState(null);
   const [selectedSong, setSelectedSong] = useState(null);
   const audioPlayer = useRef(null);
-
+ 
   useEffect(() => {
     fetch("http://localhost:4000/songs")
       .then(res => res.json())
@@ -35,6 +36,7 @@ export const PlayList = () => {
             key={song.id}
             className="flex items-center bg-stone-400 border-b gap-2 p-2"
           >
+          
             {playingIndex === index ? (
               <i
                 className="fa-solid fa-pause cursor-pointer"
@@ -48,11 +50,12 @@ export const PlayList = () => {
             )}
 
             <Img src={song.coverImage} />
-
+            
             <div className="flex flex-col">
               <p>{song.title}</p>
               {song.lyricsSnippet}
-            </div>
+            </div>    
+                <i className="fa-solid fa-heart"></i>
           </li>
         ))}
       </ul>

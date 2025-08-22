@@ -1,8 +1,10 @@
+import { PlayTable } from "./atomic/PlayTable"
+
 export const Footer=()=>{
 return(
     <>
     <footer className="flex bg-yellow-500">
-        <p>@copyRight</p>
+        <p>@copyWrite</p>
     </footer>
     </>
 )

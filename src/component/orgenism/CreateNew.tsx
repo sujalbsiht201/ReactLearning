@@ -1,4 +1,4 @@
-import { Information } from "../molecule.tsx/Information"
+import { Information } from "../molecule/Information"
 
 export const CreateNew =()=>{
     return <>

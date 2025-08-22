@@ -12,8 +12,8 @@ export const Audio = forwardRef(({ song }, ref) => {
           className="w-12 h-12 object-cover rounded"
         />
         <div>
-          <h4 className="font-semibold">{song.title}</h4>
-          <p className="text-sm text-gray-500">{song.artist}</p>
+          <h4 className="font-semibold">{song.title}</h4> 
+          <p className="text-sm text-gray-500">{song.artist}</p>  
         </div>
         <audio ref={ref} src={song.songUrl} controls className="ml-auto" />
       </div>
