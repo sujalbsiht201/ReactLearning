@@ -11,6 +11,7 @@ export const CardList = () => {
   const [showSong, setShowSong] = useState(false);
   const [showTable, setShowTable] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
+  const playerRef=useRef(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/songs")
@@ -31,6 +32,7 @@ export const CardList = () => {
     setSelectedSong(songs.find((song) => song.id === id));
     console.log(index);
     setShowTable(true);
+    // setTimeout(() => playref.current?.play(), 0);
   }
 
   return (
@@ -78,7 +80,18 @@ export const CardList = () => {
           })}
       </ul>
       <Card />
-      {showTable && <PlayTable song={selectedSong} />}
+      {/* {showTable && <PlayTable song={selectedSong} ref={playref} />} */}
+      <div style={{ marginBottom: '200px' }}>
+        <button onClick={() => playerRef.current?.play()}>
+          ▶ Play (External)
+        </button>
+        <button onClick={() => playerRef.current?.pause()} style={{ marginLeft: '10px' }}>
+          ⏸ Pause (External)
+        </button>
+      </div>
+     {showTable && <Audio song={selectedSong} ref={playerRef}/>}
+     
     </main>
   );
 };
+ 

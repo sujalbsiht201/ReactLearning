@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 
-export const PlayTable = ({ song }) => {
+export const PlayTable = forwardRef(({ song }, ref) => {
+  console.log(ref);
   const [playPause, setPlayPause] = useState(true);
   
   function handleClick() {
@@ -46,6 +47,7 @@ export const PlayTable = ({ song }) => {
             <i className="fa-solid fa-ellipsis-vertical text-2xl"></i>
         </div>
       </div>
+       <audio ref={ref} src={song.songUrl} controls className="ml-auto" />
     </>
   );
-};
+});
