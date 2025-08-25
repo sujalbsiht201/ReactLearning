@@ -63,7 +63,7 @@ export const Header = ({onChange , onFocus , onBlur , search , on}) => {
          <div>
             <h1 className="font-extrabold text-white text-3xl px-2">MyMusic</h1>
             <h4 className="text-white px-2">dil se suno</h4>
-             <SideMyBar/>
+
          </div>       
           <div className="flex justify-center">
             <SearchBar onChange={onChange} onFocus={onFocus} onBlur={onBlur}/>

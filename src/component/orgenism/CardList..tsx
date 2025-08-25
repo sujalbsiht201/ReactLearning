@@ -11,7 +11,7 @@ export const CardList = () => {
   const [showSong, setShowSong] = useState(false);
   const [showTable, setShowTable] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
-  const playerRef=useRef(null);
+  // const playerRef=useRef(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/songs")
@@ -80,8 +80,8 @@ export const CardList = () => {
           })}
       </ul>
       <Card />
-      {/* {showTable && <PlayTable song={selectedSong} ref={playref} />} */}
-      <div style={{ marginBottom: '200px' }}>
+      {showTable && <PlayTable song={selectedSong}/>}
+      {/* <div style={{ marginBottom: '200px' }}>
         <button onClick={() => playerRef.current?.play()}>
           ▶ Play (External)
         </button>
@@ -90,7 +90,7 @@ export const CardList = () => {
         </button>
       </div>
      {showTable && <Audio song={selectedSong} ref={playerRef}/>}
-     
+      */}
     </main>
   );
 };

@@ -1,11 +1,12 @@
 import { forwardRef, useRef, useState } from "react";
 
-export const PlayTable = forwardRef(({ song }, ref) => {
-  console.log(ref);
+export const PlayTable =({ song }) => {
+  // console.log(ref);
   const [playPause, setPlayPause] = useState(true);
-  
+  const playerRef= useRef(null);
   function handleClick() {
     setPlayPause(false);
+    playerRef.current?.play(); 
   }
   return (
     <>
@@ -35,6 +36,7 @@ export const PlayTable = forwardRef(({ song }, ref) => {
                   className="fa-solid fa-pause text-lg"
                   onClick={() => {
                     setPlayPause(true);
+                    playerRef.current?.pause();
                   }}
                 ></i>
               )}
@@ -47,7 +49,7 @@ export const PlayTable = forwardRef(({ song }, ref) => {
             <i className="fa-solid fa-ellipsis-vertical text-2xl"></i>
         </div>
       </div>
-       <audio ref={ref} src={song.songUrl} controls className="ml-auto" />
+       <audio ref={playerRef} src={song.songUrl} controls className="ml-auto hidden" />
     </>
   );
-});
+};
