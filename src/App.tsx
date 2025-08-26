@@ -6,13 +6,13 @@ import { MyMusic } from "./component/orgenism/MyMusic";
 
 
 function App() {
-  // const [on , setOn] = useState(true)
-  return (
-    <div className="gap-2">
+ 
+  return (  
+   <div className="gap-2">
      
       <MyMusic/>  
     </div>
-
+ 
   );
 }
 

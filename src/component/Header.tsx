@@ -58,12 +58,14 @@ export const Header = ({onChange , onFocus , onBlur , search , on}) => {
             )}
           </div>
         )} 
-      <div className="fixed top-0 left-0 w-full z-10">
+      <div className="fixed top-0 left-0 w-full z-10 ">
         <header className="bg-black p-4 flex flex-row justify-between">
-         <div>
+         <div >
             <h1 className="font-extrabold text-white text-3xl px-2">MyMusic</h1>
             <h4 className="text-white px-2">dil se suno</h4>
-
+          {/* <div className="fixed top-15 left-2">
+            <SideMyBar/>
+          </div> */}
          </div>       
           <div className="flex justify-center">
             <SearchBar onChange={onChange} onFocus={onFocus} onBlur={onBlur}/>
@@ -72,6 +74,9 @@ export const Header = ({onChange , onFocus , onBlur , search , on}) => {
             <h1 className=" px-3 font-bold"> S </h1>
             </div>
         </header>
+         <div className="fixed top-17 left-3">
+            <SideMyBar/>
+          </div>
       </div>
     </>
   );

@@ -36,7 +36,7 @@ export const CardList = () => {
   }
 
   return (
-    <main className="p-4">
+    <main className="p-8">
         <Tabs/>
       <h1 className="font-bold py-2 text-white bg-stone-600 text-3xl px-2">
         Tranding Songs 2025-Best....
