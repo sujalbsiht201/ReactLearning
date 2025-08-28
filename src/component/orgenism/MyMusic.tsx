@@ -5,6 +5,8 @@ import { Footer } from "../Footer";
 import { CardList } from "../orgenism/CardList.";
 import { PlayList } from "../orgenism/PlayList";
 import { useState } from "react";
+import { Favorate } from "./Favorate";
+
 
 
 
@@ -72,6 +74,11 @@ const SongPlaylist = () => {
   );
 };
 
+function SongFavorate(){
+  return <>
+   <Favorate/>
+  </>
+}
 export const MyMusic = () => {
   return (
     <>
@@ -79,6 +86,7 @@ export const MyMusic = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/playlist" element={<SongPlaylist />} />
+          <Route path="/favorate" element ={<SongFavorate/>}/>
         </Routes>
       </BrowserRouter>
     </>

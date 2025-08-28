@@ -1,4 +1,5 @@
-import { SideMyBar } from "./component/molecule/SideMyBar";
+import { FavoriteSongs } from "./component/molecule/FavoriteSongs";
+
 import { MyMusic } from "./component/orgenism/MyMusic";
 
 
@@ -12,7 +13,7 @@ function App() {
      
       <MyMusic/>  
     </div>
- 
+//  <FavoriteSongs/>
   );
 }
 

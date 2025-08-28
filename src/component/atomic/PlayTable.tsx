@@ -53,3 +53,16 @@ export const PlayTable =({ song }) => {
     </>
   );
 };
+
+
+
+// {/* <div style={{ marginBottom: '200px' }}>
+//         <button onClick={() => playerRef.current?.play()}>
+//           ▶ Play (External)
+//         </button>
+//         <button onClick={() => playerRef.current?.pause()} style={{ marginLeft: '10px' }}>
+//           ⏸ Pause (External)
+//         </button>
+//       </div>
+//      {showTable && <Audio song={selectedSong} ref={playerRef}/>}
+//       */}
