@@ -1,4 +1,4 @@
-export const Login = () => {
+export const Login = ( ) => {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col justify-center m-2">
@@ -25,7 +25,7 @@ export const Login = () => {
           />
         </div>
         <div className="m-10">
-          <button className="bg-blue-800 px-30 py-4 text-white font-bold hover:bg-blue-600 rounded-lg">
+          <button className="bg-blue-800 px-30 py-4 text-white font-bold hover:bg-blue-600 rounded-lg" onClick={onClick}>
             Log in
           </button>
           <div className="m-6">

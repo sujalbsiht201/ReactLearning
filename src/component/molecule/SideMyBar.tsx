@@ -26,7 +26,7 @@ export const SideMyBar=() =>{
     <i className="fa-solid fa-house"></i>
     <li>home</li>
     </div>
-    <Link to="favorate">
+    <Link to="/favorate">
     <div className="flex items-center gap-2 hover:bg-gray-600">
     <img src="https://c.saavncdn.com/073/My-Favorite-Song-English-2017-20181030074532-500x500.jpg" className="w-10 h-10 rounded-lg"/>
     <li>favorate</li>

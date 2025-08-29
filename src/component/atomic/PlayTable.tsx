@@ -50,6 +50,7 @@ export const PlayTable =({ song }) => {
         </div>
       </div>
        <audio ref={playerRef} src={song.songUrl} controls className="ml-auto hidden" />
+      
     </>
   );
 };

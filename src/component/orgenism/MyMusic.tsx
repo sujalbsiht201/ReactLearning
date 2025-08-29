@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { CardList } from "../orgenism/CardList.";
 import { PlayList } from "../orgenism/PlayList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Favorate } from "./Favorate";
 
 
@@ -42,11 +42,12 @@ const Home = () => {
   );
 };
 
-const SongPlaylist = () => {
+const SongPlaylist = ( {songs, setSongs}) => {
 
   const [search, setSearch] = useState("");
  const [on, setOn] = useState(false);
- 
+   
+
   function handleClick() {
     setOn(true);
   }
@@ -67,26 +68,36 @@ const SongPlaylist = () => {
           onBlur={() => {
           setOn(false);
           }}/> 
-        <PlayList />
+        <PlayList songs={songs} setSongs={setSongs} />
         <Footer />
       </Container>
     </>
   );
 };
 
-function SongFavorate(){
-  return <>
-   <Favorate/>
+function SongFavorate({songs}){
+const favoriteSongs = songs.filter((song) => song.isFavorite);
+
+return <>
+   <Favorate songs={favoriteSongs} />
   </>
 }
 export const MyMusic = () => {
+   const [songs , setSongs] = useState([]);
+
+    useEffect(() => {
+     fetch("http://localhost:4000/songs")
+       .then((res) => res.json())
+       .then((data) => setSongs(data));
+   }, []);
+ 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/playlist" element={<SongPlaylist />} />
-          <Route path="/favorate" element ={<SongFavorate/>}/>
+          <Route path="/playlist" element={<SongPlaylist songs={songs} setSongs={setSongs}/>} />
+          <Route path="/favorate" element ={<SongFavorate songs={songs}/>}/>
         </Routes>
       </BrowserRouter>
     </>

@@ -33,7 +33,8 @@ export const CardList = () => {
     console.log(index);
     setShowTable(true);
     // setTimeout(() => playref.current?.play(), 0);
-  }
+  } 
+  
 
   return (
     <main className="p-8">
